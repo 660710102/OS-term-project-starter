@@ -1,0 +1,64 @@
+﻿[      14 ms] [main      ] SYSTEM_START       workload=workloads\jobs_db.csv policy=priority workers=3 printer=1 database=2
+[      19 ms] [main      ] SYSTEM             Loaded 6 jobs
+[      26 ms] [generator ] JOB_ARRIVED        job=D01 priority=2 work=250ms resource=DATABASE(1200ms)
+[      31 ms] [worker-1  ] JOB_STARTED        job=D01 priority=2
+[     100 ms] [generator ] JOB_ARRIVED        job=D02 priority=1 work=300ms resource=DATABASE(1200ms)
+[     101 ms] [worker-2  ] JOB_STARTED        job=D02 priority=1
+[     202 ms] [generator ] JOB_ARRIVED        job=D03 priority=3 work=250ms resource=DATABASE(1200ms)
+[     203 ms] [worker-3  ] JOB_STARTED        job=D03 priority=3
+[     284 ms] [worker-1  ] WORK_FINISHED      job=D01
+[     290 ms] [worker-1  ] RESOURCE_WAIT      job=D01 resource=DATABASE
+[     294 ms] [worker-1  ] RESOURCE_ACQUIRED  job=D01 resource=DATABASE waited=6ms
+[     300 ms] [generator ] JOB_ARRIVED        job=D04 priority=2 work=300ms resource=DATABASE(1200ms)
+[     405 ms] [generator ] JOB_ARRIVED        job=D05 priority=1 work=250ms resource=DATABASE(1200ms)
+[     405 ms] [worker-2  ] WORK_FINISHED      job=D02
+[     406 ms] [worker-2  ] RESOURCE_WAIT      job=D02 resource=DATABASE
+[     406 ms] [worker-2  ] RESOURCE_ACQUIRED  job=D02 resource=DATABASE waited=0ms
+[     455 ms] [worker-3  ] WORK_FINISHED      job=D03
+[     456 ms] [worker-3  ] RESOURCE_WAIT      job=D03 resource=DATABASE
+[     502 ms] [generator ] JOB_ARRIVED        job=D06 priority=3 work=300ms resource=DATABASE(1200ms)
+[    1053 ms] [monitor   ] MONITOR            ready=3 running=3 completed=0 printer=0/1 database=2/2
+[    1496 ms] [worker-1  ] RESOURCE_RELEASED  job=D01 resource=DATABASE
+[    1497 ms] [worker-1  ] JOB_COMPLETED      job=D01
+[    1497 ms] [worker-1  ] JOB_STARTED        job=D05 priority=1
+[    1497 ms] [worker-3  ] RESOURCE_ACQUIRED  job=D03 resource=DATABASE waited=1041ms
+[    1608 ms] [worker-2  ] RESOURCE_RELEASED  job=D02 resource=DATABASE
+[    1608 ms] [worker-2  ] JOB_COMPLETED      job=D02
+[    1608 ms] [worker-2  ] JOB_STARTED        job=D04 priority=2
+[    1760 ms] [worker-1  ] WORK_FINISHED      job=D05
+[    1761 ms] [worker-1  ] RESOURCE_WAIT      job=D05 resource=DATABASE
+[    1761 ms] [worker-1  ] RESOURCE_ACQUIRED  job=D05 resource=DATABASE waited=1ms
+[    1915 ms] [worker-2  ] WORK_FINISHED      job=D04
+[    1915 ms] [worker-2  ] RESOURCE_WAIT      job=D04 resource=DATABASE
+[    2056 ms] [monitor   ] MONITOR            ready=1 running=3 completed=2 printer=0/1 database=2/2
+[    2711 ms] [worker-3  ] RESOURCE_RELEASED  job=D03 resource=DATABASE
+[    2711 ms] [worker-3  ] JOB_COMPLETED      job=D03
+[    2712 ms] [worker-3  ] JOB_STARTED        job=D06 priority=3
+[    2712 ms] [worker-2  ] RESOURCE_ACQUIRED  job=D04 resource=DATABASE waited=797ms
+[    2963 ms] [worker-1  ] RESOURCE_RELEASED  job=D05 resource=DATABASE
+[    2963 ms] [worker-1  ] JOB_COMPLETED      job=D05
+[    3022 ms] [worker-3  ] WORK_FINISHED      job=D06
+[    3022 ms] [worker-3  ] RESOURCE_WAIT      job=D06 resource=DATABASE
+[    3022 ms] [worker-3  ] RESOURCE_ACQUIRED  job=D06 resource=DATABASE waited=0ms
+[    3069 ms] [monitor   ] MONITOR            ready=0 running=2 completed=4 printer=0/1 database=2/2
+[    3920 ms] [worker-2  ] RESOURCE_RELEASED  job=D04 resource=DATABASE
+[    3921 ms] [worker-2  ] JOB_COMPLETED      job=D04
+[    4076 ms] [monitor   ] MONITOR            ready=0 running=1 completed=5 printer=0/1 database=1/2
+[    4231 ms] [worker-3  ] RESOURCE_RELEASED  job=D06 resource=DATABASE
+[    4232 ms] [worker-3  ] JOB_COMPLETED      job=D06
+[    4237 ms] [main      ] SYSTEM_STOP        completed=6/6
+
+================ SUMMARY REPORT ================
+Job    Arrived  Start    End      WT       RW       TAT     
+D01    26       27       1497     1        6        1471    
+D02    100      101      1608     1        0        1508    
+D03    202      203      2711     1        1041     2509    
+D04    300      1608     3921     1308     797      3621    
+D05    405      1497     2963     1092     1        2558    
+D06    502      2712     4232     2210     0        3730    
+------------------------------------------------
+Average Waiting Time      : 769 ms
+Average Turnaround Time   : 2566 ms
+Throughput                : 1.42 jobs/sec
+Average Resource Wait Time: 308 ms
+================================================

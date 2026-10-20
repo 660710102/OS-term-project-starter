@@ -1,0 +1,17 @@
+﻿[      14 ms] [main      ] SYSTEM_START       workload=workloads\jobs_single.csv policy=priority workers=1 printer=1 database=1
+[      18 ms] [main      ] SYSTEM             Loaded 1 jobs
+[      26 ms] [generator ] JOB_ARRIVED        job=ONE01 priority=2 work=800ms
+[      31 ms] [worker-1  ] JOB_STARTED        job=ONE01 priority=2
+[     845 ms] [worker-1  ] WORK_FINISHED      job=ONE01
+[     845 ms] [worker-1  ] JOB_COMPLETED      job=ONE01
+[     847 ms] [main      ] SYSTEM_STOP        completed=1/1
+
+================ SUMMARY REPORT ================
+Job    Arrived  Start    End      WT       RW       TAT     
+ONE01  26       26       845      0        0        819     
+------------------------------------------------
+Average Waiting Time      : 0 ms
+Average Turnaround Time   : 819 ms
+Throughput                : 1.18 jobs/sec
+Average Resource Wait Time: 0 ms
+================================================

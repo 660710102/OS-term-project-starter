@@ -1,0 +1,64 @@
+﻿[      14 ms] [main      ] SYSTEM_START       workload=workloads\jobs_printer.csv policy=priority workers=3 printer=2 database=2
+[      19 ms] [main      ] SYSTEM             Loaded 6 jobs
+[      26 ms] [generator ] JOB_ARRIVED        job=P01 priority=2 work=250ms resource=PRINTER(1200ms)
+[      31 ms] [worker-1  ] JOB_STARTED        job=P01 priority=2
+[     100 ms] [generator ] JOB_ARRIVED        job=P02 priority=1 work=300ms resource=PRINTER(1200ms)
+[     100 ms] [worker-3  ] JOB_STARTED        job=P02 priority=1
+[     214 ms] [generator ] JOB_ARRIVED        job=P03 priority=3 work=250ms resource=PRINTER(1200ms)
+[     214 ms] [worker-2  ] JOB_STARTED        job=P03 priority=3
+[     284 ms] [worker-1  ] WORK_FINISHED      job=P01
+[     286 ms] [worker-1  ] RESOURCE_WAIT      job=P01 resource=PRINTER
+[     292 ms] [worker-1  ] RESOURCE_ACQUIRED  job=P01 resource=PRINTER waited=2ms
+[     302 ms] [generator ] JOB_ARRIVED        job=P04 priority=2 work=300ms resource=PRINTER(1200ms)
+[     401 ms] [generator ] JOB_ARRIVED        job=P05 priority=1 work=250ms resource=PRINTER(1200ms)
+[     403 ms] [worker-3  ] WORK_FINISHED      job=P02
+[     403 ms] [worker-3  ] RESOURCE_WAIT      job=P02 resource=PRINTER
+[     403 ms] [worker-3  ] RESOURCE_ACQUIRED  job=P02 resource=PRINTER waited=0ms
+[     464 ms] [worker-2  ] WORK_FINISHED      job=P03
+[     465 ms] [worker-2  ] RESOURCE_WAIT      job=P03 resource=PRINTER
+[     503 ms] [generator ] JOB_ARRIVED        job=P06 priority=3 work=300ms resource=PRINTER(1200ms)
+[    1043 ms] [monitor   ] MONITOR            ready=3 running=3 completed=0 printer=2/2 database=0/2
+[    1494 ms] [worker-1  ] RESOURCE_RELEASED  job=P01 resource=PRINTER
+[    1494 ms] [worker-1  ] JOB_COMPLETED      job=P01
+[    1494 ms] [worker-2  ] RESOURCE_ACQUIRED  job=P03 resource=PRINTER waited=1029ms
+[    1495 ms] [worker-1  ] JOB_STARTED        job=P05 priority=1
+[    1604 ms] [worker-3  ] RESOURCE_RELEASED  job=P02 resource=PRINTER
+[    1604 ms] [worker-3  ] JOB_COMPLETED      job=P02
+[    1605 ms] [worker-3  ] JOB_STARTED        job=P04 priority=2
+[    1747 ms] [worker-1  ] WORK_FINISHED      job=P05
+[    1747 ms] [worker-1  ] RESOURCE_WAIT      job=P05 resource=PRINTER
+[    1747 ms] [worker-1  ] RESOURCE_ACQUIRED  job=P05 resource=PRINTER waited=0ms
+[    1917 ms] [worker-3  ] WORK_FINISHED      job=P04
+[    1918 ms] [worker-3  ] RESOURCE_WAIT      job=P04 resource=PRINTER
+[    2057 ms] [monitor   ] MONITOR            ready=1 running=3 completed=2 printer=2/2 database=0/2
+[    2697 ms] [worker-2  ] RESOURCE_RELEASED  job=P03 resource=PRINTER
+[    2697 ms] [worker-2  ] JOB_COMPLETED      job=P03
+[    2697 ms] [worker-3  ] RESOURCE_ACQUIRED  job=P04 resource=PRINTER waited=779ms
+[    2697 ms] [worker-2  ] JOB_STARTED        job=P06 priority=3
+[    2962 ms] [worker-1  ] RESOURCE_RELEASED  job=P05 resource=PRINTER
+[    2962 ms] [worker-1  ] JOB_COMPLETED      job=P05
+[    3008 ms] [worker-2  ] WORK_FINISHED      job=P06
+[    3008 ms] [worker-2  ] RESOURCE_WAIT      job=P06 resource=PRINTER
+[    3008 ms] [worker-2  ] RESOURCE_ACQUIRED  job=P06 resource=PRINTER waited=0ms
+[    3071 ms] [monitor   ] MONITOR            ready=0 running=2 completed=4 printer=2/2 database=0/2
+[    3901 ms] [worker-3  ] RESOURCE_RELEASED  job=P04 resource=PRINTER
+[    3902 ms] [worker-3  ] JOB_COMPLETED      job=P04
+[    4086 ms] [monitor   ] MONITOR            ready=0 running=1 completed=5 printer=1/2 database=0/2
+[    4211 ms] [worker-2  ] RESOURCE_RELEASED  job=P06 resource=PRINTER
+[    4211 ms] [worker-2  ] JOB_COMPLETED      job=P06
+[    4217 ms] [main      ] SYSTEM_STOP        completed=6/6
+
+================ SUMMARY REPORT ================
+Job    Arrived  Start    End      WT       RW       TAT     
+P01    26       27       1494     1        2        1468    
+P02    100      100      1604     0        0        1504    
+P03    214      214      2697     0        1029     2483    
+P04    302      1604     3902     1302     779      3600    
+P05    401      1494     2962     1093     0        2561    
+P06    503      2697     4211     2194     0        3708    
+------------------------------------------------
+Average Waiting Time      : 765 ms
+Average Turnaround Time   : 2554 ms
+Throughput                : 1.42 jobs/sec
+Average Resource Wait Time: 302 ms
+================================================

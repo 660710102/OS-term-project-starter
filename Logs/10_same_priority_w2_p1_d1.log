@@ -1,0 +1,44 @@
+﻿[      16 ms] [main      ] SYSTEM_START       workload=workloads\jobs_same_priority.csv policy=priority workers=2 printer=1 database=1
+[      21 ms] [main      ] SYSTEM             Loaded 6 jobs
+[      31 ms] [generator ] JOB_ARRIVED        job=S01 priority=2 work=900ms
+[      36 ms] [worker-1  ] JOB_STARTED        job=S01 priority=2
+[     100 ms] [generator ] JOB_ARRIVED        job=S02 priority=2 work=900ms
+[     100 ms] [worker-2  ] JOB_STARTED        job=S02 priority=2
+[     215 ms] [generator ] JOB_ARRIVED        job=S03 priority=2 work=900ms
+[     300 ms] [generator ] JOB_ARRIVED        job=S04 priority=2 work=900ms
+[     403 ms] [generator ] JOB_ARRIVED        job=S05 priority=2 work=900ms
+[     501 ms] [generator ] JOB_ARRIVED        job=S06 priority=2 work=900ms
+[     937 ms] [worker-1  ] WORK_FINISHED      job=S01
+[     937 ms] [worker-1  ] JOB_COMPLETED      job=S01
+[     938 ms] [worker-1  ] JOB_STARTED        job=S03 priority=2
+[    1001 ms] [worker-2  ] WORK_FINISHED      job=S02
+[    1001 ms] [worker-2  ] JOB_COMPLETED      job=S02
+[    1001 ms] [worker-2  ] JOB_STARTED        job=S04 priority=2
+[    1045 ms] [monitor   ] MONITOR            ready=2 running=2 completed=2 printer=0/1 database=0/1
+[    1845 ms] [worker-1  ] WORK_FINISHED      job=S03
+[    1846 ms] [worker-1  ] JOB_COMPLETED      job=S03
+[    1846 ms] [worker-1  ] JOB_STARTED        job=S05 priority=2
+[    1908 ms] [worker-2  ] WORK_FINISHED      job=S04
+[    1909 ms] [worker-2  ] JOB_COMPLETED      job=S04
+[    1909 ms] [worker-2  ] JOB_STARTED        job=S06 priority=2
+[    2049 ms] [monitor   ] MONITOR            ready=0 running=2 completed=4 printer=0/1 database=0/1
+[    2752 ms] [worker-1  ] WORK_FINISHED      job=S05
+[    2752 ms] [worker-1  ] JOB_COMPLETED      job=S05
+[    2816 ms] [worker-2  ] WORK_FINISHED      job=S06
+[    2816 ms] [worker-2  ] JOB_COMPLETED      job=S06
+[    2818 ms] [main      ] SYSTEM_STOP        completed=6/6
+
+================ SUMMARY REPORT ================
+Job    Arrived  Start    End      WT       RW       TAT     
+S01    31       32       937      1        0        906     
+S02    100      100      1001     0        0        901     
+S03    214      938      1846     724      0        1632    
+S04    300      1001     1909     701      0        1609    
+S05    403      1846     2752     1443     0        2349    
+S06    501      1909     2816     1408     0        2315    
+------------------------------------------------
+Average Waiting Time      : 713 ms
+Average Turnaround Time   : 1619 ms
+Throughput                : 2.13 jobs/sec
+Average Resource Wait Time: 0 ms
+================================================
