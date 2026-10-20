@@ -1,0 +1,57 @@
+import java.util.concurrent.BlockingQueue;
+
+/**
+ * รับงานจาก JobGenerator แล้วจัดเข้า Ready Queue
+ *
+ * ข้อกำหนดจากโจทย์ (หัวข้อ 2 และ 4):
+ * - Scheduler เป็น Thread บังคับ ห้ามให้ JobGenerator ใส่งานลง Ready Queue
+ * โดยตรง
+ * - รับผิดชอบการจัดลำดับตามนโยบาย FCFS หรือ Priority
+ *
+ * ข้อควรคิด:
+ * - Scheduler รับงานจาก JobGenerator ผ่านอะไร และรอโดยไม่กิน CPU อย่างไร
+ * - เมื่อ JobGenerator ปล่อยงานครบแล้ว Scheduler รู้ได้อย่างไรว่าควรหยุด
+ */
+
+public class Scheduler extends Thread {
+
+    // คิวรับงานจาก JobGenerator
+    private final BlockingQueue<Job> arrivalQueue;
+    private final ReadyQueue readyQueue;
+    private final ProjectLogger logger;
+
+    public Scheduler(BlockingQueue<Job> arrivalQueue, ReadyQueue readyQueue, ProjectLogger logger) {
+        // ตั้งชื่อ Thread สำหรับ log
+        super("scheduler");
+        this.arrivalQueue = arrivalQueue;
+        this.readyQueue = readyQueue;
+        this.logger = logger;
+    }
+
+    @Override
+    public void run() {
+        boolean interrupted = false;
+        while (true) {
+            Job job;
+            try {
+                // take() จะรอโดยไม่กิน CPU จนกว่าจะมีงาน
+                job = arrivalQueue.take();
+            } catch (InterruptedException e) {
+                // Continue draining so an interrupt cannot strand queued work.
+                interrupted = true;
+                continue;
+            }
+            // poison pill หมายถึงไม่มีงานเข้ามาอีก
+            if (job == Job.POISON_PILL) {
+                readyQueue.add(job);
+                break;
+            }
+            // เปลี่ยนสถานะและส่งเข้าคิวที่เลือกนโยบายแล้ว
+            job.state = Job.State.READY;
+            readyQueue.add(job);
+        }
+        if (interrupted) {
+            Thread.currentThread().interrupt();
+        }
+    }
+}
